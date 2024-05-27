@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> //meta name="viewport content=width=device-width,inital-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="step01">
+        <h5>과일가게</h5>
+        <ol >
+            <li v-for="item in items">{{item}}</li>
+        </ol>
+    </div>
+    <hr>
+    <!-- 
+        객체 요소 loop
+     -->
+    <div id="step02">
+        <div v-for="info in profile">
+            {{info}}
+        </div>
+        <ol>
+            <li v-for="(value, key, index) in profile">{{index}} : {{key}} : {{value}}</li>
+        </ol>
+    </div>
+    
+    <hr>
+
+    
+
+    <script>
+        const {createApp, ref, reactive} = Vue;
+        
+        createApp({
+            setup(){
+                const items = ref(['apple', 'Pineapple', 'Melon', "Watermelon"]);
+                
+                return {
+                    items
+                }
+            }
+        }).mount("#step01")
+        
+        createApp({
+            setup(){
+                const profile = reactive({
+                    name:"홍길동",
+                    address : "서울시 강남구",
+                    introduction:"Vue 전문가 의로운 홍길동"
+                })
+                return {
+                    profile
+                }
+            }
+        }).mount("#step02");
+        createApp().mount("#step03">
+        <li v-for=
+
+        createApp({
+            setup(){
+                const item = ref=([{"apple","pineapple,"Melon","Watermelon"}]);
+            }
+        })
+        <li>
+
+    </script>
+</body>
+</html>
+<div id="step05">
+    <!--
+        v.for 과  v-if가 같은 노드에 존재하면 v-for보다 v-if이 높은 우선 순위를 가진다.
+        이것은 v-for에서 item in item에서 item을 v-if에서 참조할 수 없다는 것으로 
+        다음과 같이 작성하면 오류가 발생한다.
+    <template v-for="item in items">
+        <li v-if="item.state">
+            {{item.name}}
+            </li>
+        </template>
+    </div>
+    <div id="step06">
+        <div v-for="item in items" : key="item.id">
+            {{item.id}}.{{item.name}
+        </div>
+        </div>
+
+        <script>
+            const{createApp,ref,reactive}=Vue;
+            createApp({
+                setup(){
+                    const items = ref(['apple,'pineapple','Melon',"Watermelon"]);
+                }
+            })
