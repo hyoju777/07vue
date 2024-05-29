@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><!--Vue.js 라이브러리 포함-->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <title>Scholars</title>
-    <style>
+    <style> <!--css 각 학자의 정보를 카드 형태로 보기 좋게 스타일링합니다.-->
         .scholar-container {
             display: flex;
             flex-wrap: wrap;
@@ -13,14 +13,14 @@
             
         }
         .scholar {
-            border: 1px solid #ccc;
-            padding: 5px;
-           
-            text-align: center;
+            border: 1px solid #ccc; <!-- 각 학자 정보를 담는 카드 스타일 --> 회색 실선 테두리를 1픽셀 두께로 설정
+            padding: 5px;               /*콘텐츠 주위에 20픽셀의 내부 여백(padding)을 추가*/
+                                        
+            text-align: center;         /*텍스트를 가운데 정렬*/
             max-width:300px;
             margin: 0px;
         }
-        .scholar img {
+        .scholar img {             <!-- 학자 이미지 스타일 -->
             max-width: 100px;
             height: auto;
             border-radius: 0%;
@@ -42,8 +42,12 @@
     </style>
 </head>
 <body>
-
-<div id="app">
+<!-- Vue 애플리케이션의 루트 요소-->
+<div id="app"> <!--1.HTML div 요소를 id="app"으로 설정하여 Vue 인스턴스가 마운트 될 위치를 지정
+    //마운트?
+    //v-for 디렉티브를 사용하여 scholar 배열을 반복하고, 각 학자의 정보를 scholar(학자의) 객체로 바인딩합니다.
+    //바인딩?
+    //학자의 이름,이미지,소개를 표시합니다.-->
     <div class="scholar-container">
     <div v-for="scholar in scholars" :key="scholar.id" class="scholar">
         <h2>이름: {{ scholar.name }}</h2>
@@ -53,7 +57,7 @@
     </div>
 </div>
 </div>
-<script>
+<script>//scholarData 배열을 scholars 데이터 속성으로 Vue인스턴스에 전달한다. Vue인스턴스는 #app요소에 마운트된다.
 const scholarData = [
     {
         "id": 1,
