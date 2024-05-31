@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 입력창을 만든다 -->
+        <label>입력</label>
+        <input v-model="label"/>
+        <!-- 이모지 이미지를 표시 -->
+        <div v-if="emoji">
+            <img :src="emoji" alt="Emoji" />
+        </div>
+    </div>
+
+    <script>
+        //vue.js의 기능들을 가져옵니다.
+        const { createApp, ref, reactive, watchEffect, watch } = Vue;
+
+        //vue 앱을 생성합니다.
+        createApp({
+            setup() {
+                //label 변수는 입력도니 텍스트 값을 저장합니다.
+                const label = ref("");
+                // emoji 변수는 표시할 이모지 URL을 저장합니다.
+                const emoji = ref("");
+                // emojis 객체는 GitHub API에서 가져온 이모지 데이터를 저장합니다.
+                const emojis = reactive({});
+
+                // 초기 데이터 목록을 받아오기 위함
+                //컴코넌트가 초기화될 때 Github 이모
+                watchEffect(async () => {
+                    const response = await fetch("https://api.github.com/emojis");
+                    const data = await response.json();
+                    Object.assign(emojis, data);
+                });
+
+                // 입력된 label이 변경될 때마다 해당하는 이모지를 찾기 위함
+                watch(label, (newLabel) => {
+                    if (newLabel in emojis) {
+                        emoji.value = emojis[newLabel];
+                    } else {
+                        emoji.value = "";
+                    }
+                });
+
+                return {
+                    label,
+                    emoji,
+                    emojis
+                }
+            }
+        }).mount("#app");
+    </script>
+</body>
+</html>

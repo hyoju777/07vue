@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Document</title>
+</head>
+<!-- 
+    입력된 데이터 값은 확인되었고
+    밖에 표출되기 위한 코드 입력
+    
+-->
+<body>
+    <div id="app">
+        <!--입력창을 만든다-->
+      <label>입력</label>
+         <input v-model="label"/>
+     </div>
+    
+ <!--   <div id = "app">
+        {{label, emoji, emojis}}
+    </div>-->
+    <script>
+         const { createApp, ref,reactive, watch, watchEffect } = Vue;
+
+        createApp({
+            setup() {
+                // input의 값을 입력기 위함
+                const label = ref();
+                // 이미지를 보여주기 위함
+                const emoji = ref();
+                // image 목록을 받아오기 위함
+                let emojis = reactive({});
+
+                // 초기 데이터 목록을 받아오기 위함
+                // 이렇게 안해도 상관없으나 오늘 복습을 위함
+                watchEffect(async () => {
+                    emojis = await fetch("https://api.github.com/emojis")
+                        .then(response => response.json())
+                        .then(data => data);
+                    console.log(emojis[""])
+                });
+
+                return{
+                    label,
+                    emoji,
+                    emojis
+
+                }
+            }
+        }).mount("#app");
+    
+
+    </script>
+</body>
+</html>
